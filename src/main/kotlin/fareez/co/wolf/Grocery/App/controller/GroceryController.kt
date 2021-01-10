@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping("groceries")
+@RequestMapping("/groceries")
 class GroceryController (private val groceryRepository: GroceryItemRepository) {
 
-    @GetMapping
+    @RequestMapping("/")
     fun getGroceryList(): MutableIterable<GroceryItem> {
         return groceryRepository.findAll()
     }
