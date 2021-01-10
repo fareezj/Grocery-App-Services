@@ -32,6 +32,7 @@ class GroceryController (private val groceryRepository: GroceryItemRepository) {
         val item = groceryRepository.findById(id)
         return when {
             item.isPresent -> {
+                groceryRepository.deleteById(id)
                 ResponseEntity(
                         StatusResponseEntity(true, "deleted item ${item.get().name} from list ", true),
                         HttpStatus.OK
