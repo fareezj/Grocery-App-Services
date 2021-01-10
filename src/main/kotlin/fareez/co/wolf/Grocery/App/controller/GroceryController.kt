@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 class GroceryController (private val groceryRepository: GroceryItemRepository) {
 
     @GetMapping
-    fun getGroceryList(): MutableIterable<GroceryItem> {
+    fun getGroceriesList(): MutableIterable<GroceryItem> {
         return groceryRepository.findAll()
     }
 
