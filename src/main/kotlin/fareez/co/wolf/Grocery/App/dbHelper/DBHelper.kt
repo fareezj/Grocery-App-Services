@@ -10,7 +10,7 @@ import javax.persistence.PrePersist
 class DBHelper(private val groceryRepository: GroceryItemRepository) : CommandLineRunner {
 
     @PrePersist
-    fun deleteAllGroceryItem) {
+    fun deleteAllGroceryItem() {
         groceryRepository.deleteAll()
     }
 
