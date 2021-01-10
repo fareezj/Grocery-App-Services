@@ -14,5 +14,5 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.0.4
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: android-rest-services
+          heroku_app_name: grocery-app-services
           heroku_email: fareezjasmi1@gmail.com
