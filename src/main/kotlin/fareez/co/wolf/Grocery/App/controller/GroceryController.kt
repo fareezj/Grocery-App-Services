@@ -3,6 +3,7 @@ package fareez.co.wolf.Grocery.App.controller
 import fareez.co.wolf.Grocery.App.model.GroceryItem
 import fareez.co.wolf.Grocery.App.controller.StatusResponseEntity
 import fareez.co.wolf.Grocery.App.repository.GroceryItemRepository
+import org.springframework.data.jpa.repository.Query
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -46,12 +47,32 @@ class GroceryController (private val groceryRepository: GroceryItemRepository) {
             }
         }
     }
+
+    @PutMapping("/isChecked/{id}")
+    fun updateIsChecked(@PathVariable("id") id: Long, @RequestBody isChecked: Boolean)
+                        : ResponseEntity<StatusResponseEntity<Boolean>>{
+
+        val item = groceryRepository.findById(id)
+        return when {
+            item.isPresent -> {
+                item.get().isChecked = isChecked
+                groceryRepository.save(item.get())
+                ResponseEntity(StatusResponseEntity(true, "item ${item.get().name} is now ${if (isChecked) "available" else "finished"} ", true), HttpStatus.OK)
+            }
+            else -> {
+                ResponseEntity(StatusResponseEntity(false, "sorry could not find that item", false), HttpStatus.NOT_FOUND)
+            }
+        }
+
+    }
+
+
     @PostMapping("/available")
     fun toggleGroceryItemAvailability(@RequestBody availability: Boolean, @RequestParam("id") id: Long): ResponseEntity<StatusResponseEntity<Boolean>> {
         val item = groceryRepository.findById(id)
         return when {
             item.isPresent -> {
-                item.get().isAvailable = availability
+                item.get().isChecked = availability
                 groceryRepository.save(item.get())
                 ResponseEntity(StatusResponseEntity(true, "item ${item.get().name} is now ${if (availability) "available" else "finished"} ", true), HttpStatus.OK)
             }
