@@ -7,11 +7,12 @@ import javax.persistence.Id
 
 @Entity
 data class GroceryItem (var name: String,
-                        var isAvailable: Boolean,
+                        var isChecked: Boolean,
+                        var username: String,
+                        var groupID: Long,
                         @Id
                         @GeneratedValue(strategy = GenerationType.AUTO)
-                        var id: Long = 0L
-                        )
+                        var id: Long = 0L)
 
 
 

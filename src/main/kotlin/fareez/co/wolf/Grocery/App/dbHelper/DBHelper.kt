@@ -17,10 +17,10 @@ class DBHelper(private val groceryRepository: GroceryItemRepository) : CommandLi
     @Throws(Exception::class)
     override fun run(vararg args: String?) {
         val items = listOf(
-                GroceryItem("Beans", true),
-                GroceryItem("Eggs", false),
-                GroceryItem("Milk", true),
-                GroceryItem("Cheese", true)
+                GroceryItem("Beans", true, "Fareez", 100),
+                GroceryItem("Eggs", true, "Fareez", 110),
+                GroceryItem("Milk", true, "Fareez", 120),
+                GroceryItem("Cheese", true, "Fareez", 130)
         )
         groceryRepository.saveAll(items)
     }
