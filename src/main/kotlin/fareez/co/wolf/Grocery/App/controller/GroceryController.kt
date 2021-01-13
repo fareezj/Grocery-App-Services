@@ -1,9 +1,7 @@
 package fareez.co.wolf.Grocery.App.controller
 
 import fareez.co.wolf.Grocery.App.model.GroceryItem
-import fareez.co.wolf.Grocery.App.controller.StatusResponseEntity
 import fareez.co.wolf.Grocery.App.repository.GroceryItemRepository
-import org.springframework.data.jpa.repository.Query
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -19,14 +17,9 @@ class GroceryController (private val groceryRepository: GroceryItemRepository) {
     }
 
     @RequestMapping("/group/{groupId}")
-    fun getNoteItemByGroup(@PathVariable("groupId") groupId: Int):ResponseEntity<StatusResponseEntity<List<GroceryItem>>>{
+    fun getNoteItemByGroup(@PathVariable("groupId") groupId: Int):List<GroceryItem>{
             val result =  groceryRepository.findAll()
-            val filtered = result.filter { it.groupID == groupId }
-            return ResponseEntity(StatusResponseEntity(
-            true,
-            "Added new grocery item to your list",
-            filtered
-            ), HttpStatus.CREATED)
+            return result.filter { it.groupID == groupId }
     }
 
     @PutMapping
