@@ -9,7 +9,7 @@ import javax.persistence.Id
 data class GroceryItem (var name: String,
                         var isChecked: Boolean,
                         var username: String,
-                        var groupID: Long,
+                        var groupID: Int,
                         @Id
                         @GeneratedValue(strategy = GenerationType.AUTO)
                         var id: Long = 0L)
