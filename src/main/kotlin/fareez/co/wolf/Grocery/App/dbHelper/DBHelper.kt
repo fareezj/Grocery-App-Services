@@ -19,6 +19,7 @@ class DBHelper(private val groceryRepository: GroceryItemRepository) : CommandLi
         val items = listOf(
                 GroceryItem("Beans", false, "Fareez", 100),
                 GroceryItem("Eggs", false, "Fareez", 110),
+                GroceryItem("Eggs", false, "Fareez", 110),
                 GroceryItem("Milk", false, "Fareez", 120),
                 GroceryItem("Cheese", false, "Fareez", 130)
         )

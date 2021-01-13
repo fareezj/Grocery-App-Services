@@ -18,6 +18,17 @@ class GroceryController (private val groceryRepository: GroceryItemRepository) {
         return groceryRepository.findAll()
     }
 
+    @RequestMapping("/group")
+    fun getNoteItemByGroup(groupId: Int):ResponseEntity<StatusResponseEntity<List<GroceryItem>>>{
+            val result =  groceryRepository.findAll()
+            val filtered = result.filter { it.groupID == groupId }
+            return ResponseEntity(StatusResponseEntity(
+            true,
+            "Added new grocery item to your list",
+            filtered
+            ), HttpStatus.CREATED)
+    }
+
     @PutMapping
     fun addGroceryItem(@RequestBody groceryItem: GroceryItem): ResponseEntity<StatusResponseEntity<GroceryItem>> {
         val savedItem = groceryRepository.save(groceryItem)
