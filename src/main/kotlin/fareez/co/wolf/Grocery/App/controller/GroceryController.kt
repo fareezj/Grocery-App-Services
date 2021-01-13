@@ -18,8 +18,8 @@ class GroceryController (private val groceryRepository: GroceryItemRepository) {
         return groceryRepository.findAll()
     }
 
-    @RequestMapping("/group")
-    fun getNoteItemByGroup(groupId: Int):ResponseEntity<StatusResponseEntity<List<GroceryItem>>>{
+    @RequestMapping("/group/{groupId}")
+    fun getNoteItemByGroup(@PathVariable("groupId") groupId: Int):ResponseEntity<StatusResponseEntity<List<GroceryItem>>>{
             val result =  groceryRepository.findAll()
             val filtered = result.filter { it.groupID == groupId }
             return ResponseEntity(StatusResponseEntity(
